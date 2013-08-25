@@ -5,6 +5,7 @@
             <li><a href="<?=SERVER_URL."admin/index.php?view=client_list"?>">Client Management</a></li>
             <li><a href="<?=SERVER_URL."admin/index.php?view=rate_list"?>">Rate Management</a></li>
             <li><a href="<?=SERVER_URL."admin/index.php?view=payment_list"?>">Payment Management</a></li>
+            <li><a href="<?=SERVER_URL."admin/index.php?view=call_log_list"?>">Call Log</a></li>
         </ul>
     </div>
 </div>

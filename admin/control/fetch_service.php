@@ -5,6 +5,7 @@ use includes\classes\AdminManager;
 use includes\classes\ClientManager;
 use includes\classes\RateManager;
 use includes\classes\PaymentManager;
+use includes\classes\CallLogManager;
 
 if (!empty($_REQUEST['operation_id'])) {
     switch ($_REQUEST['operation_id']) {
@@ -32,6 +33,14 @@ if (!empty($_REQUEST['operation_id'])) {
             $end  = $_REQUEST['end'];
             $paymentManager = new PaymentManager();
             $data = $paymentManager->getAdminPaymentTableDataSource($start, $end, $client_id);
+            break;
+
+        case "fetch_call_log_table":
+            $client_id  = $_REQUEST['client_id'];
+            $start  = $_REQUEST['start'];
+            $end  = $_REQUEST['end'];
+            $callLogManager = new CallLogManager();
+            $data = $callLogManager->getAdminCallLogTableDataSource($start, $end, $client_id);
             break;
 
         default:

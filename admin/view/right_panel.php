@@ -28,6 +28,12 @@
             include_once(BASE_PATH . 'admin/view/payment_list.php');
             break;
 
+        case "call_log_list":
+            include_once(BASE_PATH . 'admin/view/call_log_list.php');
+            break;
+
+
+
         default:
             include_once(BASE_PATH . 'admin/view/admin_list.php');
             break;
