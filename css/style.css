@@ -222,6 +222,8 @@ table.general_table {
   border-collapse: separate; }
   table.general_table tr {
     vertical-align: middle; }
+  table.general_table tr.empty_table_row {
+    height: 20px; }
 
 /* slickgrid table */
 div.slickgrid_table {

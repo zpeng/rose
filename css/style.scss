@@ -300,6 +300,10 @@ table.general_table {
   tr {
     vertical-align: middle;
   }
+
+  tr.empty_table_row {
+    height: 10px;
+  }
 }
 
 /* slickgrid table */

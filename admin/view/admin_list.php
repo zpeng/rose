@@ -21,7 +21,7 @@
     <br/>
 
     <form id="createAdminForm" action="<?= SERVER_URL ?>admin/control/admin_create.php" method='post'>
-        <table width="500" border="0" class="dialogTable">
+        <table width="500" border="0" class="general_table">
             <tr>
                 <td width="150" align="right"><b>Admin Email: </b></td>
                 <td><input name="admin_email" id="admin_email" style="width: 200px;"/></td>

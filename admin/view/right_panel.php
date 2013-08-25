@@ -12,6 +12,18 @@
         case "admin_update":
             include_once(BASE_PATH . 'admin/view/admin_update.php');
             break;
+
+        case "client_list":
+            include_once(BASE_PATH . 'admin/view/client_list.php');
+            break;
+        case "client_update":
+            include_once(BASE_PATH . 'admin/view/client_update.php');
+            break;
+
+        case "rate_list":
+            include_once(BASE_PATH . 'admin/view/rate_list.php');
+            break;
+
         default:
             include_once(BASE_PATH . 'admin/view/admin_list.php');
             break;

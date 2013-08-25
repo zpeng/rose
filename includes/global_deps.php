@@ -61,6 +61,7 @@ $GLOBAL_DEPS = array(
             "DatabaseUtils" => "includes/utils/database_utils.php",
             "GlobalFunction" => "includes/utils/global_functions.php",
             "PageBuilder" => "includes/utils/page_builder.php",
+            "HtmlWidgets" => "includes/utils/html_widgets.php",
         )
     )
 )

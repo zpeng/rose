@@ -1,5 +1,5 @@
 <?php
-namespace includes\shared\classes;
+namespace includes\utils;
 
 class FileUploader
 {
