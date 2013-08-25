@@ -3,10 +3,10 @@ namespace  includes\classes;
 
 class Admin
 {
-    public $admin_id;
-    public $admin_email;
-    public $admin_password;
-    public $active;
+    private $admin_id;
+    private $admin_email;
+    private $admin_password;
+    private $active;
 
     public function setActive($active)
     {

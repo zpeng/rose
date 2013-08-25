@@ -57,6 +57,21 @@ class ClientManager {
         }
         return $dataSource;
     }
+
+    public function getActiveClientlistDataSource()
+    {
+        $clientList = $this->loadClientList("Y");
+        $data = array();
+        if (sizeof($clientList) > 0) {
+            foreach ($clientList as $client) {
+                $data[$client->getEmail() . " - ". $client->getFirstname() ." ". $client->getLastname()] = $client->getClientId();
+            }
+        }
+        $dataSource = array(
+            "data" => $data
+        );
+        return $dataSource;
+    }
 }
 
 ?>

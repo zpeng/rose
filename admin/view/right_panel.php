@@ -24,6 +24,10 @@
             include_once(BASE_PATH . 'admin/view/rate_list.php');
             break;
 
+        case "payment_list":
+            include_once(BASE_PATH . 'admin/view/payment_list.php');
+            break;
+
         default:
             include_once(BASE_PATH . 'admin/view/admin_list.php');
             break;

@@ -4,6 +4,7 @@ namespace includes\classes;
 class Client
 {
     private $client_id;
+
     private $email;
     private $password;
 

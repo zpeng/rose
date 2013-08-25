@@ -4,6 +4,7 @@ require_once('../../includes/bootstrap.php');
 use includes\classes\AdminManager;
 use includes\classes\ClientManager;
 use includes\classes\RateManager;
+use includes\classes\PaymentManager;
 
 if (!empty($_REQUEST['operation_id'])) {
     switch ($_REQUEST['operation_id']) {
@@ -20,10 +21,17 @@ if (!empty($_REQUEST['operation_id'])) {
             $data = $clientManager->getClientTableDataSource($is_active);
             break;
 
-
         case "fetch_rate_table":
             $rateManager = new RateManager();
             $data = $rateManager->getAdminRateTableDataSource();
+            break;
+
+        case "fetch_payment_table":
+            $client_id  = $_REQUEST['client_id'];
+            $start  = $_REQUEST['start'];
+            $end  = $_REQUEST['end'];
+            $paymentManager = new PaymentManager();
+            $data = $paymentManager->getAdminPaymentTableDataSource($start, $end, $client_id);
             break;
 
         default:
