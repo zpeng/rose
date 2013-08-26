@@ -115,16 +115,18 @@
         var payment_grid;
         var columns = [
             {id: "id", name: "ID", field: "id", width: 60},
-            {id: "client_name", name: "Client Name", field: "client_name", width: 150},
-            {id: "timestamp", name: "Payment Time", field: "timestamp", width: 200},
-            {id: "amount", name: "Amount", field: "amount", width: 100},
-            {id: "payment_method", name: "Payment Method", field: "payment_method", width: 150},
-            {id: "remark", name: "Remark", field: "remark", width: 100}
+            {id: "client_name", name: "Client Name", field: "client_name", width: 120},
+            {id: "timestamp", name: "Payment Time", field: "timestamp", width: 120},
+            {id: "amount", name: "Amount", field: "amount", width: 80},
+            {id: "actual_cost", name: "Actual Cost", field: "actual_cost", width: 80},
+            {id: "payment_method", name: "Payment Method", field: "payment_method", width: 120},
+            {id: "remark", name: "Remark", field: "remark", width: 150}
         ];
         var options = {
             enableCellNavigation: true,
             enableColumnReorder: false,
-            forceFitColumns: true
+            forceFitColumns: true,
+            enableTextSelectionOnCells: true
         };
 
         //use ajax to load data source

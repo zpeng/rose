@@ -32,7 +32,9 @@
             include_once(BASE_PATH . 'admin/view/call_log_list.php');
             break;
 
-
+        case "call_log_upload_staging":
+            include_once(BASE_PATH . 'admin/view/call_log_upload_staging.php');
+            break;
 
         default:
             include_once(BASE_PATH . 'admin/view/admin_list.php');

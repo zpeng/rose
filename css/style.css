@@ -223,7 +223,7 @@ table.general_table {
   table.general_table tr {
     vertical-align: middle; }
   table.general_table tr.empty_table_row {
-    height: 20px; }
+    height: 10px; }
 
 /* slickgrid table */
 div.slickgrid_table {
@@ -281,3 +281,17 @@ a.icon_admin {
     padding-left: 20px;
     color: #ffcc00;
     background: url(../images/exclamation.png) left no-repeat; }
+
+div.balance_div {
+  height: 30px;
+  font-size: 14px;
+  font-weight: bolder;
+  padding-top: 10px;
+  padding-left: 10px;
+  padding-left: 10px;
+  color: #152f7c; }
+
+span.balance {
+  font-size: 12px;
+  font-weight: bolder;
+  color: darkgreen; }

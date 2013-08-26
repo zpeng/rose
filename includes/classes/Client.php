@@ -135,6 +135,10 @@ class Client
         return $this->lastname;
     }
 
+    public function getFullName(){
+        return $this->getFirstname() . " " .$this->getLastname();
+    }
+
     public function setMargin($margin)
     {
         $this->margin = $margin;
@@ -206,6 +210,51 @@ class Client
                               active
                     from    client
                     where   client_id =  " . $id;
+
+        $result = executeNonUpdateQuery($link, $query);
+        closeConnection($link);
+
+        while ($newArray = mysql_fetch_array($result)) {
+            $this->setClientId($newArray['client_id']);
+            $this->setEmail($newArray['email']);
+            $this->setFirstname($newArray['firstname']);
+            $this->setLastname($newArray['lastname']);
+            $this->setPassword($newArray['password']);
+            $this->setTelephone($newArray['telephone']);
+            $this->setMobile($newArray['mobile']);
+            $this->setAddress1($newArray['add_1']);
+            $this->setAddress2($newArray['add_2']);
+            $this->setPostcode($newArray['postcode']);
+            $this->setCity($newArray['city']);
+            $this->setCountry($newArray['country']);
+            $this->setCurrency($newArray['currency']);
+            $this->setBalance($newArray['balance']);
+            $this->setMargin($newArray['margin']);
+            $this->setActive($newArray['active']);
+        }
+    }
+
+    public function loadByEmail($email)
+    {
+        $link = getConnection();
+        $query = " select    client_id,
+                              email,
+                              firstname,
+                              lastname,
+                              password,
+                              telephone,
+                              mobile,
+                              add_1,
+                              add_2,
+                              postcode,
+                              city,
+                              country,
+                              currency,
+                              balance,
+                              margin,
+                              active
+                    from    client
+                    where   email =  '" . $email."'";
 
         $result = executeNonUpdateQuery($link, $query);
         closeConnection($link);

@@ -2,6 +2,7 @@
 namespace includes\classes;
 
 use includes\classes\Rate;
+use includes\classes\Client;
 
 class RateManager
 {
@@ -69,15 +70,18 @@ class RateManager
         return $dataSource;
     }
 
-    public function getClientRateTableDataSource($margin)
+    public function getClientRateTableDataSource($client_id)
     {
+        $client = New Client();
+        $client->loadByID($client_id);
+        $margin = $client->getMargin();
         $rate_list = $this->loadRateList();
         $dataSource = array();
         if (sizeof($rate_list) > 0) {
             foreach ($rate_list as $rate) {
                 array_push($dataSource, array(
                     "destination" => $rate->getDestination(),
-                    "rate" => floatval($rate->getRate()) * (1 + $margin),
+                    "rate" => number_format(floatval($rate->getRate()) * (1 + $margin),2),
                 ));
             }
         }

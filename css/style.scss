@@ -381,3 +381,20 @@ a.icon_admin {
     background: url(../images/exclamation.png) left no-repeat;
   }
 }
+
+
+div.balance_div{
+  height: 30px;
+  font-size: 14px;
+  font-weight: bolder;
+  padding-top: 10px;
+  padding-left: 10px;
+  padding-left: 10px;
+  color: $blue4;
+}
+
+span.balance{
+  font-size: 12px;
+  font-weight: bolder;
+  color: darkgreen;
+}

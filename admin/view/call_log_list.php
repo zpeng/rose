@@ -43,7 +43,7 @@
             <tr>
                 <td></td>
                 <td>
-                    <input name='Add' id="add_button" type='submit' value='Create'/>
+                    <input name='Add' id="add_button" type='submit' value='Upload'/>
                     <input name='Reset' id="reset_button" type='reset' value='Reset'/>
                 </td>
             </tr>
@@ -118,7 +118,8 @@
         var options = {
             enableCellNavigation: true,
             enableColumnReorder: false,
-            forceFitColumns: true
+            forceFitColumns: true,
+            enableTextSelectionOnCells: true
         };
 
         //use ajax to load data source
@@ -144,7 +145,11 @@
 
         //when page rendering is completed
         $(document).ready(function () {
+
+            displayMsgFromServer();
+
             fetch_data();
+
         });
 
 

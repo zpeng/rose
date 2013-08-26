@@ -13,6 +13,7 @@ class PaymentManager {
                               CONCAT(client.firstname , ' ', client.lastname) AS client_name,
                               timestamp,
                               amount,
+                              actual_cost,
                               payment_method,
                               remark
                      FROM  payment, client
@@ -33,6 +34,7 @@ class PaymentManager {
             $payment->setClientName($newArray['client_name']);
             $payment->setTimestamp($newArray['timestamp']);
             $payment->setAmount($newArray['amount']);
+            $payment->setActualCost($newArray['actual_cost']);
             $payment->setPaymentMethod($newArray['payment_method']);
             $payment->setRemark($newArray['remark']);
             array_push($payment_list, $payment);
@@ -52,8 +54,26 @@ class PaymentManager {
                     "client_name" => $payment->getClientName(),
                     "timestamp" => $payment->getTimestamp() ,
                     "amount" => $payment->getAmount(),
+                    "actual_cost" => $payment->getActualCost(),
                     "payment_method" => $payment->getPaymentMethod(),
                     "remark" => $payment->getRemark(),
+                ));
+            }
+        }
+        return $dataSource;
+    }
+
+    public function getClientPaymentTableDataSource($start = "", $end = "", $client_id = 0)
+    {
+        $payment_list = $this->loadPaymentList($start, $end, $client_id);
+        $dataSource = array();
+        if (sizeof($payment_list) > 0) {
+            foreach ($payment_list as $payment) {
+                array_push($dataSource, array(
+                    "id" => $payment->getPaymentId(),
+                    "timestamp" => $payment->getTimestamp() ,
+                    "amount" => $payment->getAmount(),
+                    "payment_method" => $payment->getPaymentMethod()
                 ));
             }
         }

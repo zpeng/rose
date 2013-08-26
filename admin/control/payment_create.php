@@ -8,17 +8,20 @@ $payment_method = secureRequestParameter($_REQUEST["payment_method"]);
 $amount = secureRequestParameter($_REQUEST["amount"]);
 $remark = secureRequestParameter($_REQUEST["remark"]);
 
+$client = new Client();
+$client->loadByID($client_id);
+
 // insert the payment
 $payment = new Payment();
 $payment->setClientId($client_id);
 $payment->setAmount($amount);
+$payment->setActualCost(floatval($amount) * (1 - floatval($client->getMargin())));
 $payment->setPaymentMethod($payment_method);
 $payment->setRemark($remark);
 $payment->insert();
 
 //now update the balance
-$client = new Client();
-$client->loadByID($client_id);
+
 $client->setBalance($client->getBalance() + $amount);
 $client->updateBalance($client->getBalance());
 

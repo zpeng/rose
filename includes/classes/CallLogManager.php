@@ -51,6 +51,7 @@ class CallLogManager
         $client = new Client();
         $client->loadByID($client_id);
         $margin = floatval($client->getMargin());
+        $charge = 0;
 
         if (!is_null($array_from_csv) && sizeof($array_from_csv) > 0) {
             //build up insert query
@@ -63,12 +64,17 @@ class CallLogManager
                         . ",\"" . $data[2] . "\""
                         . "," . $data[3]
                         . "," . floatval($data[3]) * (1 + $margin)  . "),";
+
+                    $charge = $charge + floatval($data[3]) * (1 + $margin);
                 }
             }
             $query = substr($query, 0, -1); //remove the last ,
             $link = getConnection();
             executeUpdateQuery($link, $query);
             closeConnection($link);
+
+            $remain_balance = floatval($client->getBalance()) - $charge;
+            $client->updateBalance($remain_balance);
         }
     }
 
@@ -87,6 +93,24 @@ class CallLogManager
                     "duration" => $callLog->getDuration(),
                     "base_rate" => $callLog->getBaseRate(),
                     "charge" => $callLog->getCharge(),
+                ));
+            }
+        }
+        return $dataSource;
+    }
+
+    public function getClientCallLogTableDataSource($start = "", $end = "", $client_id = 0)
+    {
+        $call_log_list = $this->loadCallLogList($start, $end, $client_id);
+        $dataSource = array();
+        if (sizeof($call_log_list) > 0) {
+            foreach ($call_log_list as $callLog) {
+                array_push($dataSource, array(
+                    "id" => $callLog->getLogId(),
+                    "call_number" => $callLog->getCallNumber(),
+                    "timestamp" => $callLog->getStartTimestamp(),
+                    "duration" => $callLog->getDuration(),
+                    "charge" => $callLog->getCharge()
                 ));
             }
         }

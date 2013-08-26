@@ -43,3 +43,17 @@ function getParameterByName(name) {
         results = regex.exec(location.search);
     return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
 }
+
+
+function displayMsgFromServer() {
+    var error = getParameterByName("error");
+    if (error) {
+        jQuery("div#notification").html("<span class='error'>" + error + "</span>");
+    }
+
+    var info = getParameterByName("info");
+    if (info) {
+        jQuery("div#notification").html("<span class='info'>" + info + "</span>");
+    }
+
+}

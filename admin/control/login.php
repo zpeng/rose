@@ -19,6 +19,7 @@ if ($result) {
     $_SESSION['user_name'] = $email;
     $_SESSION['user_id'] = $admin->get_admin_id();
     $_SESSION['user_logged_in'] = $result;
+    $_SESSION['is_admin'] = true;
 
     // to setup the configuration
     require_once('user_session_serialization.php');

@@ -72,6 +72,35 @@ class ClientManager {
         );
         return $dataSource;
     }
+
+    //put your code here
+    public function login($email, $password)
+    {
+        $link = getConnection();
+        $loginResult = false;
+        $password = md5($password);
+
+        $query = " select client_id,
+                        email,
+                        active
+                from    client
+                where   active =   'Y'
+                and     email =       '" . $email . "'
+                and     password =   '" . $password . "'";
+
+
+        $result = executeNonUpdateQuery($link, $query);
+        closeConnection($link);
+
+        $num_rows = mysql_num_rows($result); // Find no. of rows retrieved from DB
+
+        if ($num_rows == 1) {
+            $loginResult = true; // login successful
+        } else {
+            $loginResult = false; // login failure
+        }
+        return $loginResult;
+    }
 }
 
 ?>

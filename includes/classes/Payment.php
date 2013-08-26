@@ -8,8 +8,19 @@ class Payment
     private $client_name;
     private $timestamp;
     private $amount;
+    private $actual_cost;
     private $payment_method;
     private $remark;
+
+    public function setActualCost($actual_cost)
+    {
+        $this->actual_cost = $actual_cost;
+    }
+
+    public function getActualCost()
+    {
+        return $this->actual_cost;
+    }
 
     public function setClientName($client_name)
     {
@@ -89,6 +100,7 @@ class Payment
                               CONCAT(client.firstname , ' ', client.lastname) AS client_name,
                               timestamp,
                               amount,
+                              actual_cost,
                               payment_method,
                               remark
                      FROM  payment, client
@@ -104,6 +116,7 @@ class Payment
             $this->setClientName($newArray['client_name']);
             $this->setTimestamp($newArray['timestamp']);
             $this->setAmount($newArray['amount']);
+            $this->setActualCost($newArray['actual_cost']);
             $this->setPaymentMethod($newArray['payment_method']);
             $this->setRemark($newArray['remark']);
         }
@@ -117,11 +130,13 @@ class Payment
                             (client_id,
                              timestamp,
                              amount,
+                             actual_cost,
                              payment_method,
                              remark)
                         VALUES (". $this->getClientId() . ",
                                 NOW(),
                                 " . $this->getAmount() . ",
+                                " . $this->getActualCost() . ",
                                 '" . $this->getPaymentMethod() . "',
                                 '" . $this->getRemark() . "')";
 

@@ -119,7 +119,8 @@
         var options = {
             enableCellNavigation: true,
             enableColumnReorder: false,
-            forceFitColumns: true
+            forceFitColumns: true,
+            enableTextSelectionOnCells: true
         };
 
         //use ajax to load data source
