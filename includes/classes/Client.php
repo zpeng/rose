@@ -283,7 +283,7 @@ class Client
     {
         $link = getConnection();
 
-        $query = "INSERT INTO CLIENT
+        $query = "INSERT INTO client
                             (email,
                              firstname,
                              lastname,
