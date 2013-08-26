@@ -6,7 +6,7 @@ use includes\classes\Payment;
 class PaymentManager {
 
     private function loadPaymentList($start = "", $end = "", $client_id = 0 ){
-        $payment_list = [];
+        $payment_list = array();
         $link = getConnection();
         $query = "  SELECT    payment_id,
                               payment.client_id,

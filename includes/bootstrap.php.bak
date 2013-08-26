@@ -1,13 +1,13 @@
 <?php
 /** define the database **/
 define('DB_HOST', "localhost");
-define('DB_NAME', "rose");
-define('DB_USER', "root");
-define('DB_PASSWORD', "");
+define('DB_NAME', "maqsoods_rose_billing");
+define('DB_USER', "maqsoods_billing");
+define('DB_PASSWORD', "19840617");
 
 /** define server and project location - used to load css and js files **/
-define('SERVER_URL', "http://localhost/rose/");
-define('PROJECT_FOLDER', "/rose"); // in case the project folder is sub-folder of the root folder
+define('SERVER_URL', "http://www.billing.rosetelecom.co.uk/");
+define('PROJECT_FOLDER', ""); // in case the project folder is sub-folder of the root folder
 
 /** define base path - used for loading php files */
 if (!defined('BASE_PATH'))

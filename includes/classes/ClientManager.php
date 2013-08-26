@@ -6,7 +6,7 @@ use includes\classes\Client;
 class ClientManager {
 
     private function loadClientList($is_active = "Y"){
-        $client_list = [];
+        $client_list = array();
         $link = getConnection();
         $query = " select    client_id,
                               email,

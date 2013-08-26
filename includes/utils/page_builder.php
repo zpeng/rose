@@ -40,9 +40,9 @@ function output_css_tag($css_deps)
     }
 }
 
-function outputDependencies($key_array = [], $js_deps)
+function outputDependencies($key_array = array(), $js_deps)
 {
-    $dep_list = [];
+    $dep_list = array();
     // load deps from config
     foreach ($key_array as $key) {
         if (array_key_exists($key, $js_deps)) {

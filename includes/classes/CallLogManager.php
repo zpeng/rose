@@ -9,7 +9,7 @@ class CallLogManager
 
     private function loadCallLogList($start = "", $end = "", $client_id = 0)
     {
-        $call_log_list = [];
+        $call_log_list = array();
         $link = getConnection();
         $query = "  SELECT    log_id,
                               call_log.client_id,

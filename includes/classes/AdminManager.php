@@ -34,7 +34,7 @@ class AdminManager
 
     public function getAdminList($is_active = "Y")
     {
-        $adminList = [];
+        $adminList = array();
         $link = getConnection();
 
         $query = "select admin_id,

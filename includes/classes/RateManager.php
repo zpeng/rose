@@ -9,7 +9,7 @@ class RateManager
 
     private function loadRateList()
     {
-        $rate_list = [];
+        $rate_list = array();
         $link = getConnection();
         $query = " select    destination,
                               rate
