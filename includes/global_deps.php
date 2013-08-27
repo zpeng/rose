@@ -62,6 +62,7 @@ $GLOBAL_DEPS = array(
             "GlobalFunction" => "includes/utils/global_functions.php",
             "PageBuilder" => "includes/utils/page_builder.php",
             "HtmlWidgets" => "includes/utils/html_widgets.php",
+            "pdf" => "external/php/MPDF57/mpdf.php"
         )
     )
 )

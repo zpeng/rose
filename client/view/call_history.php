@@ -3,8 +3,11 @@
 <div id="content">
     <table style="width: 900px;" border="0">
         <tr>
-            <td style="width: 450px; text-align: left"><b>Start Date: </b><input name="start_date" id="start_date" style="width: 120px;"/></td>
-            <td style="width: 450px; text-align: left"><b>End Date:</b> <input name="end_date" id="end_date" style="width: 120px;"/></td>
+            <td style="width: 300px; text-align: left"><b>Start Date: </b><input name="start_date" id="start_date" style="width: 120px;"/></td>
+            <td style="width: 300px; text-align: left"><b>End Date:</b> <input name="end_date" id="end_date" style="width: 120px;"/></td>
+            <td style="width: 300px; text-align: right">
+                <input type="button" id="print_button" name="print_button" class="print_button" />
+                </td>
         </tr>
     </table>
     <div id="call_log_grid" class="slickgrid_table" style="width: 900px; height:600px"></div>
@@ -77,6 +80,17 @@
 
         $("#end_date").change(function () {
             fetch_data();
+        });
+
+
+
+        $( "#print_button" ).click(function() {
+            var url = SERVER_URL + "client/control/call_log_print.php";
+            url = url + "?start=" + $("#start_date").val();
+            url = url + "&end=" + $("#end_date").val();
+            url = url + "&client_id=<?=$client_id?>";
+            //alert(url);
+            window.open(url, '_blank');
         });
     });
 </script>
