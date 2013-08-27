@@ -57,15 +57,15 @@ class CallLogManager
             //build up insert query
             $query = "INSERT INTO call_log (client_id, timestamp, call_number, duration, base_rate, charge) VALUES ";
             foreach ($array_from_csv as $data) {
-                if ($data[0] != "") {
+                if (trim($data[0]) != "") {
                     $query = $query . "(" . $client_id
-                        . ",\"" . $data[0] . "\""
-                        . ",\"" . $data[1] . "\""
-                        . ",\"" . $data[2] . "\""
-                        . "," . $data[3]
-                        . "," . floatval($data[3]) * (1 + $margin)  . "),";
+                        . ",\"" . trim($data[0]) . "\""
+                        . ",\"" . trim($data[1]) . "\""
+                        . ",\"" . str_replace(" ", "", $data[2]) . "\""
+                        . "," . trim($data[3])
+                        . "," . floatval(trim($data[3])) * (1 + $margin)  . "),";
 
-                    $charge = $charge + floatval($data[3]) * (1 + $margin);
+                    $charge = $charge + floatval(trim($data[3])) * (1 + $margin);
                 }
             }
             $query = substr($query, 0, -1); //remove the last ,
