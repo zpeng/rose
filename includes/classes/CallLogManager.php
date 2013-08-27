@@ -123,13 +123,12 @@ class CallLogManager
         $call_log_list = $this->loadCallLogList($start, $end, $client_id);
 
         $css = "<style>";
-        $header= "<div class='body'><div id='header'><table><tr><td width=150><b>Client Name:</b></td><td width=250>".$client->getFullName()."</td><td width=150><b>Email:</b></td><td width=250>".$client->getEmail()."</td></tr><tr><td><b>Start Date:</b></td><td>".$start."</td><td><b>End Date:</b></td><td>".$end."</td></tr></table></div>";
-        $body= "<div id='log_table'><table><tr><td width=150><b>Log ID</b></td><td width=200><b>Calling At</b></td><td width=150><b>Start At</b></td><td width=150><b>Duration</b></td><td width=150><b>Charge</b></td></tr>";
+        $header= "<div class='body'><div id='header'><img src='http://www.billing.rosetelecom.co.uk/images/roselogo.png'><table><tr><td width=150><b>Client Name:</b></td><td width=250>".$client->getFullName()."</td><td width=150><b>Email:</b></td><td width=250>".$client->getEmail()."</td></tr><tr><td><b>Start Date:</b></td><td>".$start."</td><td><b>End Date:</b></td><td>".$end."</td></tr></table></div>";
+        $body= "<div id='log_table'><table><tr><td width=200><b>Calling At</b></td><td width=250><b>Start At</b></td><td width=200><b>Duration</b></td><td width=150><b>Charge</b></td></tr>";
 
         if (sizeof($call_log_list) > 0) {
             foreach ($call_log_list as $callLog) {
-                $body = $body. "<tr><td>".$callLog->getLogId()
-                    ."</td><td>".$callLog->getCallNumber()
+                $body = $body. "<tr><td>".$callLog->getCallNumber()
                     ."</td><td>".$callLog->getStartTimestamp()
                     ."</td><td>".$callLog->getDuration()
                     ."</td><td>".$callLog->getCharge()."</td></tr>";

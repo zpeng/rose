@@ -1,8 +1,12 @@
 <?php
+if (session_id() == "") {
+    session_start();
+}
+
 require_once('../../includes/bootstrap.php');
 use includes\classes\CallLogManager;
 
-$client_id = $_REQUEST["client_id"];
+$client_id = $_SESSION['user_id'];
 $start  = $_REQUEST['start'];
 $end  = $_REQUEST['end'];
 
