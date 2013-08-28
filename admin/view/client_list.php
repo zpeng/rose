@@ -23,6 +23,10 @@
     <form id="createClientForm" action="<?= SERVER_URL ?>admin/control/client_create.php" method='post'>
         <table width="500" border="0" class="general_table">
             <tr>
+                <td width="150" align="right"><b>Client ID: </b></td>
+                <td><input name="client_id" id="client_id" style="width: 200px;"/></td>
+            </tr>
+            <tr>
                 <td width="150" align="right"><b>Client Email: </b></td>
                 <td><input name="email" id="email" style="width: 200px;"/></td>
             </tr>
@@ -145,6 +149,11 @@
 
 
         jQuery(function () {
+            jQuery("#client_id").validate({
+                expression: "if (VAL) return true; else return false;",
+                message: "Please enter the Required field"
+            });
+
             jQuery("#client_email").validate({
                 expression: "if (VAL.match(/^[^\\W][a-zA-Z0-9\\_\\-\\.]+([a-zA-Z0-9\\_\\-\\.]+)*\\@[a-zA-Z0-9_]+(\\.[a-zA-Z0-9_]+)*\\.[a-zA-Z]{2,4}$/)) return true; else return false;",
                 message: "Please enter a valid Email"
@@ -174,15 +183,17 @@
 
         var client_grid;
         var columns = [
-            {id: "id", name: "ID", field: "id", width: 60},
+            {id: "id", name: "ID", field: "id", width: 150},
             {id: "email", name: "Email", field: "email", width: 150},
-            {id: "name", name: "Name", field: "name", width: 200},
-            {id: "currency", name: "Currency", field: "currency", width: 100},
-            {id: "balance", name: "Current Balance", field: "balance", width: 150},
-            {id: "margin", name: "Margin", field: "margin", width: 100},
-            {id: "action", name: "Action", field: "action", width: 60,
+            {id: "name", name: "Name", field: "name", width: 150},
+            {id: "currency", name: "Currency", field: "currency", width: 80},
+            {id: "balance", name: "Current Balance", field: "balance", width: 100},
+            {id: "margin", name: "Margin", field: "margin", width: 80},
+            {id: "action", name: "Action", field: "action", width: 80,
                 formatter: linkFormatter = function (row, cell, value, columnDef, dataContext) {
                     return "<a class='icon_edit' title='Update Client Information' href='" + SERVER_URL + "admin/index.php?view=client_update&client_id=" +
+                        dataContext['id'] + "' ></a>" +
+                        "<a class='icon_reload' title='Update Client Balance' href='" + SERVER_URL + "admin/control/client_balance_update.php?client_id=" +
                         dataContext['id'] + "' ></a>";
                 }
             }

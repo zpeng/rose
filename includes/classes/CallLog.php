@@ -7,10 +7,21 @@ class CallLog {
     private $client_id;
     private $client_name;
     private $call_number;
+    private $destination;
     private $start_timestamp;
     private $duration;
     private $base_rate;
     private $charge;
+
+    public function setDestination($destination)
+    {
+        $this->destination = $destination;
+    }
+
+    public function getDestination()
+    {
+        return $this->destination;
+    }
 
     public function setBaseRate($base_rate)
     {

@@ -5,7 +5,7 @@ use includes\classes\Payment;
 
 class PaymentManager {
 
-    private function loadPaymentList($start = "", $end = "", $client_id = 0 ){
+    private function loadPaymentList($start = "", $end = "", $client_id = "" ){
         $payment_list = array();
         $link = getConnection();
         $query = "  SELECT    payment_id,
@@ -21,7 +21,7 @@ class PaymentManager {
                      AND   timestamp >= '".$start."'
                      AND   timestamp <= '".$end."' ";
         if ($client_id != 0) {
-            $query = $query. "AND payment.client_id = ".$client_id;
+            $query = $query. "AND payment.client_id = '" . $client_id."'";
         }
 
         $result = executeNonUpdateQuery($link, $query);

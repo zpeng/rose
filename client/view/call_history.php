@@ -34,6 +34,7 @@
         var call_log_grid;
         var columns = [
             {id: "call_number", name: "Calling At", field: "call_number", width: 200},
+            {id: "destination", name: "Destination", field: "destination", width: 200},
             {id: "timestamp", name: "Start At", field: "timestamp", width: 200},
             {id: "duration", name: "Duration", field: "duration", width: 150},
             {id: "charge", name: "Charge", field: "charge", width: 100}
@@ -52,7 +53,7 @@
                 type: "POST",
                 data: {
                     operation_id: "fetch_call_log_table",
-                    client_id: <?=$client_id?>,
+                    client_id: "<?=$client_id?>",
                     start: $("#start_date").val(),
                     end: $("#end_date").val()
                 },

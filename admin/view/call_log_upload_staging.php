@@ -5,57 +5,38 @@
     use includes\classes\Client;
 
     $csv_file = $_REQUEST['csv_file'];
-    $client_id = $_REQUEST['client_id'];
-    $client = new Client();
-    $client->loadByID($client_id);
 
     $num_rows = 0;
-    $charge = 0;
-    $margin = floatval($client->getMargin());
     $array_from_csv = readCSV($csv_file);
     $dataSource = array();
     foreach ($array_from_csv as $data) {
         if ($data[0] != "") {
             ++$num_rows;
-            $charge = $charge + floatval(trim($data[3])) * (1 + $margin);
 
             array_push($dataSource, array(
-                "timestamp" => trim($data[0]),
-                "call_number" => trim($data[1]),
-                "duration" => str_replace(" ", "", $data[2]),
-                "base_rate" => trim($data[3])
+                "client_id" => trim($data[0]),
+                "timestamp" => trim($data[1]),
+                "call_number" => trim($data[2]),
+                "destination" => trim($data[3]),
+                "duration" => str_replace(" ", "", $data[4]),
+                "base_rate" => trim($data[5])
             ));
         }
     }
 
-    $remain_balance = floatval($client->getBalance()) - $charge;
     ?>
     <div class="important_announce">
         <b>Make sure you check the following items before proceeding:
-            <br> - Is the following client who intend to upload the call log for ?
             <br> - Is the total number of records matching with you original excel sheet or csv file ?
-            <br> - Is the calculation for the charge and balance correct ?
+            <br> - Is each data columns matching our data contract
             <br> - Is the data appears in the table correct? Is the data structure correct?
         </b>
     </div>
 
 
     <form id="csvLogCallInsertForm" method="post" action="<?= SERVER_URL ?>admin/control/call_log_insert.php">
-        <input type="hidden" value="<? echo $client_id ?>" name="client_id" id="client_id"/>
         <input type="hidden" value="<? echo $csv_file ?>" name="csv_file" id="csv_file"/>
         <table width="900" border="0" class="general_table">
-            <tr>
-                <td width="150" align="right"><b>Client Email: </b></td>
-                <td><?=$client->getEmail()?></td>
-            </tr>
-            <tr>
-                <td width="150" align="right"><b>Client Name: </b></td>
-                <td><?=$client->getFullName()?></td>
-            </tr>
-            <tr>
-                <td width="150" align="right"><b>Current Balance: </b></td>
-                <td><?=$client->getBalance()?></td>
-            </tr>
             <tr>
                 <td width="150" align="right"><b>Location of the Call Log File: </b></td>
                 <td><?=$csv_file?></td>
@@ -63,14 +44,6 @@
             <tr>
                 <td width="150" align="right"><b> Number of Records</b>: </b></td>
                 <td><?=$num_rows?></td>
-            </tr>
-            <tr>
-                <td width="150" align="right"><b> Total Charge</b>: </b></td>
-                <td><?=$charge?></td>
-            </tr>
-            <tr>
-                <td width="150" align="right"><b> Balance after Charge</b>: </b></td>
-                <td><?=$remain_balance?></td>
             </tr>
             <tr>
                 <td colspan="2">
@@ -114,10 +87,12 @@
         $(document).ready(function () {
             var call_log_grid;
             var columns = [
-                {id: "timestamp", name: "Call Timestamp", field: "timestamp", width: 200},
-                {id: "call_number", name: "Calling Number", field: "call_number", width: 200},
-                {id: "duration", name: "Duration", field: "duration", width: 200},
-                {id: "base_rate", name: "Base Charge", field: "base_rate", width: 200}
+                {id: "client_id", name: "Client Id", field: "client_id", width: 150},
+                {id: "timestamp", name: "Call Timestamp", field: "timestamp", width: 150},
+                {id: "call_number", name: "Calling Number", field: "call_number", width: 150},
+                {id: "destination", name: "Destination", field: "destination", width: 150},
+                {id: "duration", name: "Duration", field: "duration", width: 150},
+                {id: "base_rate", name: "Base Charge", field: "base_rate", width: 150}
             ];
             var options = {
                 enableCellNavigation: true,

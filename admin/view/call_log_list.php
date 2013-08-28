@@ -6,8 +6,8 @@
     $clientManager = new ClientManager();
     $client_list_ds = $clientManager->getActiveClientlistDataSource();
 
-    $client_list_ds["data"]["Show All Clients"] = "0";
-    $client_list_ds["selected"]["Show All Clients"] = "0";
+    $client_list_ds["data"]["Show All Clients"] = "";
+    $client_list_ds["selected"]["Show All Clients"] = "";
     ?>
     <a id="upload_call_log" class="anchor_button" href="#">Upload Call Log</a>
     <br class="clear">
@@ -26,13 +26,6 @@
     <form id="createPaymentForm" action="<?= SERVER_URL ?>admin/control/call_log_upload.php" method="post"
           enctype='multipart/form-data'>
         <table width="500" border="0" class="general_table">
-            <tr>
-                <td width="150" align="right"><b>Client: </b></td>
-                <td>
-                    <?echo createDropdownList("client_dropdown", "client_dropdown", "", "", "1", $clientManager->getActiveClientlistDataSource());?>
-                </td>
-            </tr>
-
             <tr>
                 <td width="150" align="right"><b>Log File: </b></td>
                 <td> <input name="csv_uploaded" id="csv_uploaded" type="file"/>

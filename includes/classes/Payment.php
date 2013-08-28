@@ -133,7 +133,7 @@ class Payment
                              actual_cost,
                              payment_method,
                              remark)
-                        VALUES (". $this->getClientId() . ",
+                        VALUES ('". $this->getClientId() . "',
                                 NOW(),
                                 " . $this->getAmount() . ",
                                 " . $this->getActualCost() . ",

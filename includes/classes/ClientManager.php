@@ -6,9 +6,9 @@ use includes\classes\Client;
 class ClientManager {
 
     private function loadClientList($is_active = "Y"){
-        $client_list = array();
-        $link = getConnection();
-        $query = " select    client_id,
+    $client_list = array();
+    $link = getConnection();
+    $query = " select    client_id,
                               email,
                               firstname,
                               lastname,
@@ -19,23 +19,49 @@ class ClientManager {
                     from    client
                     where   active =   '".$is_active."'";
 
+    $result = executeNonUpdateQuery($link, $query);
+    closeConnection($link);
+
+    while ($newArray = mysql_fetch_array($result)) {
+        $client = new Client();
+        $client->setClientId($newArray['client_id']);
+        $client->setEmail($newArray['email']);
+        $client->setFirstname($newArray['firstname']);
+        $client->setLastname($newArray['lastname']);
+        $client->setCurrency($newArray['currency']);
+        $client->setBalance($newArray['balance']);
+        $client->setMargin($newArray['margin']);
+        $client->setActive($newArray['active']);
+
+        array_push($client_list, $client);
+    }
+    return $client_list;
+}
+
+    public function getClientMarginMap(){
+        $map = array();
+        $link = getConnection();
+        $query = " select   client_id,
+                             margin
+                    from    client";
+
         $result = executeNonUpdateQuery($link, $query);
         closeConnection($link);
 
         while ($newArray = mysql_fetch_array($result)) {
-            $client = new Client();
-            $client->setClientId($newArray['client_id']);
-            $client->setEmail($newArray['email']);
-            $client->setFirstname($newArray['firstname']);
-            $client->setLastname($newArray['lastname']);
-            $client->setCurrency($newArray['currency']);
-            $client->setBalance($newArray['balance']);
-            $client->setMargin($newArray['margin']);
-            $client->setActive($newArray['active']);
-
-            array_push($client_list, $client);
+            $map[trim($newArray['client_id'])] = $newArray['margin'];
         }
-        return $client_list;
+        return $map;
+    }
+
+    public function updateClientsBalance($client_id_list = array()){
+        if (sizeof($client_id_list) > 0) {
+            foreach ($client_id_list as $client_id) {
+                $client = new Client();
+                $client->setClientId($client_id);
+                $client->updateBalance();
+            }
+        }
     }
 
     public function getClientTableDataSource($is_active = "Y")

@@ -51,7 +51,7 @@
                 type: "POST",
                 data: {
                     operation_id: "fetch_payment_table",
-                    client_id: <?=$client_id?>,
+                    client_id: "<?=$client_id?>",
                     start: $("#start_date").val(),
                     end: $("#end_date").val()
                 },

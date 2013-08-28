@@ -209,7 +209,7 @@ class Client
                               margin,
                               active
                     from    client
-                    where   client_id =  " . $id;
+                    where   client_id =  '" . $id. "'";
 
         $result = executeNonUpdateQuery($link, $query);
         closeConnection($link);
@@ -284,7 +284,8 @@ class Client
         $link = getConnection();
 
         $query = "INSERT INTO client
-                            (email,
+                            (client_id,
+                             email,
                              firstname,
                              lastname,
                              password,
@@ -298,7 +299,8 @@ class Client
                              currency,
                              margin,
                              active)
-                        VALUES ('" . $this->getEmail() . "',
+                        VALUES ('" . $this->getClientId() . "',
+                                '" . $this->getEmail() . "',
                                 '" . $this->getFirstname() . "',
                                 '" . $this->getLastname() . "',
                                 '" . $this->getPassword() . "',
@@ -325,7 +327,7 @@ class Client
         $link = getConnection();
         $query = " UPDATE client
                SET    password = '" . $new_password . "'
-               WHERE  client_id = " . $this->getClientId();
+               WHERE  client_id = '" . $this->getClientId()."'";
 
         $result = executeUpdateQuery($link, $query);
         closeConnection($link);
@@ -337,7 +339,7 @@ class Client
         $link = getConnection();
         $query = " UPDATE client
                    SET    active = '" . $is_active . "'
-                   WHERE  client_id = " . $this->getClientId();
+                   WHERE  client_id = '" . $this->getClientId()."'";
         executeUpdateQuery($link, $query);
         closeConnection($link);
     }
@@ -347,17 +349,35 @@ class Client
         $link = getConnection();
         $query = " UPDATE client
                    SET    margin = " . $margin . "
-                   WHERE  client_id = " . $this->getClientId();
+                   WHERE  client_id = '" . $this->getClientId()."'";
         executeUpdateQuery($link, $query);
         closeConnection($link);
     }
 
-    public function updateBalance($balance){
+    public function updateBalance(){
+        $charge = 0.0;
+        $payment_amount = 0.0;
+        $balance = 0.0;
         $link = getConnection();
-        $query = " UPDATE client
-                   SET    balance = ".$balance."
-                   WHERE  client_id = " . $this->getClientId();
-        executeUpdateQuery($link, $query);
+
+        // get the total charge
+        $query1 = " SELECT SUM(charge) as charge FROM call_log WHERE call_log.client_id = '" . $this->getClientId()."'";
+        $result = executeNonUpdateQuery($link, $query1);
+        $newArray = mysql_fetch_array($result);
+        $charge =   floatval($newArray["charge"]);
+
+        //get the total payment amount
+        $query2 = " SELECT SUM(amount) as payment_amount FROM payment WHERE payment.client_id = '" . $this->getClientId()."'";
+        $result = executeNonUpdateQuery($link, $query2);
+        $newArray = mysql_fetch_array($result);
+        $payment_amount =   floatval($newArray["payment_amount"]);
+
+        // now you have the balance
+        $balance = $payment_amount - $charge;
+
+        //finally, update the database
+        $query3 = " UPDATE client SET balance = ".$balance." WHERE client_id = '" . $this->getClientId()."'";
+        executeUpdateQuery($link, $query3);
         closeConnection($link);
     }
 
@@ -377,7 +397,7 @@ class Client
                          currency = '".$this->getCurrency()."',
                          active = '" . $this->getActive() . "',
                          margin = " . $this->getMargin() . "
-                   WHERE  client_id = " . $this->getClientId();
+                   WHERE  client_id = '" . $this->getClientId()."'";
         executeUpdateQuery($link, $query);
         closeConnection($link);
     }

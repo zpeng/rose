@@ -2,6 +2,7 @@
 require_once('../../includes/bootstrap.php');
 use includes\classes\Client;
 
+$client_id = secureRequestParameter($_REQUEST["client_id"]);
 $email = secureRequestParameter($_REQUEST["email"]);
 $password = secureRequestParameter($_REQUEST["password"]);
 $firstname = secureRequestParameter($_REQUEST["firstname"]);
@@ -17,7 +18,7 @@ $currency = secureRequestParameter($_REQUEST["currency"]);
 $margin = secureRequestParameter($_REQUEST["margin"]);
 
 $client = new Client();
-
+$client->setClientId($client_id);
 $client->setEmail($email);
 $client->setPassword(md5($password));
 $client->setFirstname($firstname);

@@ -21,9 +21,7 @@ $payment->setRemark($remark);
 $payment->insert();
 
 //now update the balance
-
-$client->setBalance($client->getBalance() + $amount);
-$client->updateBalance($client->getBalance());
+$client->updateBalance();
 
 $url = SERVER_URL . "admin/index.php?view=payment_list"; // target of the redirect
 $msg = "Payment has been recorded!";
